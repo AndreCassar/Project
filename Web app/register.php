@@ -28,7 +28,45 @@
     </style>
 </head>
     <body>
-      
+      <?php
+				//if submit_btn was pressed
+				if (isset($_POST['submit_btn'])) {
+					$user = $_POST['user'];
+					$email = $_POST['email'];
+                    $pass = $_POST['pass'];
+					
+					if (empty($user) || empty($email) || empty($pass)) {
+						echo "<div class=\"alert alert-danger text center\"> You need to enter all details</div>";
+					}
+					else {
+						$link = mysqli_connect("localhost", "root", "", "my_movie_list_db", 3307);
+						if (mysqli_connect_errno()) {
+							echo "<div class=\"alert alert-error\">Error connecting to DB...".mysqli_connect_error()."</div>";
+							exit;
+						}
+						$query = "SELECT * FROM users WHERE username = '".$user."'";
+                        $result = mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
+                        if(mysqli_fetch_assoc($result) >= 1)
+                        {
+                            echo "<div class=\"alert alert-danger\">User already exists</div>";
+                        }
+                        else
+                        {
+                            $query = "INSERT INTO users (username, email, password) VALUES('$user', '$email', '$pass')";
+                            //send statement to mysql
+                            mysqli_query($link, $query);
+
+                            //check if 1 row was added...
+                            if (mysqli_affected_rows($link) == 1) {
+                                echo "<div class=\"alert alert-success\">Thank you! You were registered!</div>";
+                            }
+                            else {
+                                echo "<div class=\"alert alert-warning\">Oops! Something went wrong!</div>";
+                            }    
+                        }
+					}
+				}
+        ?>
        <div class="vertical-center">
         <div class="container">
                 <div class="jumbotron bg-secondary text-black">
@@ -41,7 +79,7 @@
                           <h2 class="justify-content-center">Register</h2>
                         </div>
                     </div>
-                     <form method="" action="#">
+                     <form action="register.php" method="post">
                       <div class="form-group row">
                         <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
@@ -51,7 +89,7 @@
                       <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" name="pass" placeholder="Email" required>
+                          <input type="email" class="form-control" name="email" placeholder="Email" required>
                         </div>
                       </div>
                       <div class="form-group row">
@@ -60,7 +98,7 @@
                           <input type="password" class="form-control" name="pass" placeholder="Password" required>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-dark btn-lg btn-block">Register</button>
+                      <button type="submit" name="submit_btn" class="btn btn-dark btn-lg btn-block">Register</button>
                     </form>
                 </div>
                 <div class="col-sm-2"></div>
