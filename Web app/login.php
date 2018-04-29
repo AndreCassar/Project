@@ -19,8 +19,7 @@
             }
             else{
                 //connect to DB
-                $link = mysqli_connect("localhost", "root", "", "my_movie_list_db", 3307) or die();
-                
+                include('connect.php');
                 $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
                 
                 $result = mysqli_query($link, $sql) or die(mysqli_error($link));
