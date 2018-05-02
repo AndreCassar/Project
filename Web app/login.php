@@ -23,11 +23,13 @@
                 $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
                 
                 $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+                $row = mysqli_fetch_assoc($result);
                 
                 if(mysqli_num_rows($result) == 1)
                 {
                     //log user in!
                     $_SESSION['username'] = $username;
+                    $_SESSION['user_id'] = $row[user_id];
                     header("location:home.php?login=1");
                 }
                 else

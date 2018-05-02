@@ -23,17 +23,12 @@ $('#search').click(function()
             //alert( "Load was performed, we got the books" );
             console.log(data.Title);
             console.log(data.Genre);
-            document.getElementById("titl").innerHTML = data.Title;
             $("#title").val(data.Title);
-            document.getElementById("genre").innerHTML = data.Genre;
             $("#genre").val(data.Genre);
-            document.getElementById("date").innerHTML = data.Released;
             $("#date").val(data.Released);
-            document.getElementById("rating").innerHTML = data.imdbRating+"/10";
             $("#rating").val(data.imdbRating);
-            document.getElementById("url").src = data.Poster;
+            $("#url").val(data.Poster);
 
         } 
     });
-    
 });

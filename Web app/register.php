@@ -39,11 +39,7 @@
 						echo "<div class=\"alert alert-danger text center\"> You need to enter all details</div>";
 					}
 					else {
-						$link = mysqli_connect("localhost", "root", "", "my_movie_list_db", 3307);
-						if (mysqli_connect_errno()) {
-							echo "<div class=\"alert alert-error\">Error connecting to DB...".mysqli_connect_error()."</div>";
-							exit;
-						}
+                        include('connect.php');
 						$query = "SELECT * FROM users WHERE username = '".$user."'";
                         $result = mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
                         if(mysqli_fetch_assoc($result) >= 1)
