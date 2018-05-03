@@ -43,7 +43,7 @@
                             <a class="nav-link" href="home.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="favourites.html">List</a>
+                            <a class="nav-link" href="list.php">List</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="movieSearch.php">Search</a>
@@ -103,7 +103,7 @@
                     <td id="rating">sdfsdf</td>
                     <td><img id="url" src="" alt="No preview available" height="240" width="180"></td>
                     <td>
-                    <form action="watched.php" method="post">id
+                    <form action="watched.php" method="post">
                         <input id="id" type="hidden" name="movie_id">
                         <input id="title" type="hidden" name="title">
                         <input id="dat" type="hidden" name="date">
@@ -139,7 +139,7 @@
           src="http://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
           crossorigin="anonymous"></script>
-        <script src="js/Search.js"></script>
+        <script src="js/movieSearch.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     </body>

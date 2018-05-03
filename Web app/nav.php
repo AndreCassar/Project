@@ -12,7 +12,7 @@
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="favourites.html">List</a>
+                    <a class="nav-link" href="list.php">List</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="movieSearch.php">Search</a>

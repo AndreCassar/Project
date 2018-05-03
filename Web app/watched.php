@@ -2,19 +2,21 @@
     session_start();
     if(isset($_POST['submit_btn']))
     {
+        $id = $_POST['movie_id'];
         $title = $_POST['title'];
         $date = $_POST['date'];
         $rating = $_POST['rating'];
         $url = $_POST['image'];
         $genre = $_POST['genre'];
-        $id = $_POST['movie_id'];
         echo "Title: ".$title."<br/>";
         echo "Date released: ".$date."<br/>";
         echo "rating: ".$rating."<br/>";
+        echo "ID: ".$id."<br/>";
         
         include('connect.php');
-        $query = "INSERT INTO movies (movie_id, title, date, rating, image) VALUES ('$title', '$date', '$rating', '$url')";
-        mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
+        $query = "INSERT INTO movies (movie_id, title, date, rating, image) VALUES ('$id', '$title', '$date', '$rating', '$url')";
+        mysqli_query($link, $query);
+        
         $findme = ', ';
         
         function mb_stripos_all($haystack, $needle) 
@@ -39,8 +41,7 @@
             return false;
           }
         }
-        echo "<br/>";
-        echo "<br/>";
+
         $num = mb_stripos_all($genre, $findme);
         echo "dgdg: ".strpos($genre, ', ');
         for ($x = 0; $x < sizeof($num)+1; $x++) 
@@ -73,33 +74,29 @@
                 
             }
             echo "G is: ".$g;
-            //INSERT INTO `genre` (`genre_Id`, `genre`) VALUES (NULL, 'Action');
-            $query = "INSERT INTO `genre` (`genre_Id`, `genre`) VALUES (NULL, '$g')";
-            mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
+            $query = "INSERT INTO `genre` (`genre`) VALUES ('$g')";
+            mysqli_query($link, $query);
             
-            $sql = "INSERT INTO `movie-genre` (`movie_id`, `genre_id`) VALUES (NULL, '$g')";
-            mysqli_query($link, $sql) or die("Error in query: ". mysqli_error($link));
+            $sql = "INSERT INTO `movie-genre` (`movie_id`, `genre`) VALUES ('$id', '$g')";
+            mysqli_query($link, $sql);
             
         } 
         
         
-        /*
+        
         $added = true;
-        mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
+        //mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
         if(mysqli_affected_rows($link) != 1)
         {
             $added = false;
         }
         
-        $sql = "SELECT movie_id FROM movies WHERE title = '$title' AND date = '$date'";
-        $result = mysqli_query($link, $sql) or die("Error in query: ". mysqli_error($link));
-        $row = mysqli_fetch_assoc($result);
-        
+          
         $u = $_SESSION['user_id'];
-        echo "INSERT INTO `movie-user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('38', '1', NULL, NULL, NULL, NULL, NULL);";
-        $query = "INSERT INTO `movie-user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('$row[movie_id]', '$u', NULL, NULL, 'True', NULL, NULL);";
-        echo "<br/>".$query."<br/>";
-        mysqli_query($link, $query) or die("Error in query2: ". mysqli_error($link));
+
+        $query = "INSERT INTO `movie-user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('$id', '$u', NULL, NULL, 'True', NULL, NULL);";
+        mysqli_query($link, $query);
+        
         if(mysqli_affected_rows($link) != 1)
         {
             $added = false;
@@ -108,7 +105,7 @@
         {
             header("location:movieSearch.php?added=1");
         }
-        */
+        
     }
     else
     {
