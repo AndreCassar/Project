@@ -2,6 +2,7 @@
     session_start();
     if(!isset($_SESSION['username']))
     {
+        header("location:index.php");
         die("You did not log in properly");
     }
 ?>
@@ -19,15 +20,68 @@
                 margin:0;
                 padding:0;
                 background-image: url(http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg);
-            }   
+            }
+            h3
+            {
+                text-align: center;
+                color: darkorange;
+            }
 
-        </style> 
+        </style>
+        <script>
+            function light() {
+                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+            }
+            function dark() 
+            {
+                document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
+            }
+        </script> 
     </head>
 
     <body>
         <?php
             include('nav.php');
         ?>
+        
+        <div id="info" class="container">
+            <h3>Top 10 highest ranked movies from our database!</h3>
+              <div class="table-responsive-sm">
+            
+            <table class="table table-dark">
+                <tr>
+                    <th><font color="#669960">Rank</font></th>
+                    <th><font color="#669960">Title</font></th>
+                    <th><font color="#669960">Avg. Rating</font></th>
+                </tr>
+                <?php
+                    include('connect.php');
+                    $u = $_SESSION['user_id'];
+                    //$query = "SELECT * FROM `movie-user` WHERE user_id = ".$u;
+                    $query = "SELECT * FROM `movies` ORDER BY `rating` DESC";
+                    
+                    //echo $query;
+                    $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
+                    $rank = 1;
+                    while ($row = mysqli_fetch_assoc($result))
+                    {    
+						echo "<tr>";
+                        echo "<td><h4>".$rank."</h4></td>";
+				        echo "<td>".$row['title']."</td>";
+						echo "<td>".$row['rating']."</td>";
+						echo "</tr>";
+                        $rank++;
+                        if($rank > 10)
+                        {
+                            break;
+                        }
+					}
+                ?>
+                
+            </table>
+            </div>
+            
+        </div>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>

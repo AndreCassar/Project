@@ -2,6 +2,7 @@
     session_start();
     if(!isset($_SESSION['username']))
     {
+        header("location:index.php");
         die("You did not log in properly");
     }
 ?>
@@ -26,43 +27,35 @@
             }
 
         </style>
+        <script>
+            function light() {
+                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+            }
+            function dark() 
+            {
+                document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
+            }
+        </script>
+         
 
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-4">
-            <div class="container">
-                <a class="navbar-brand" href="#"><i class="fa fa-ravelry text-danger" aria-hidden="true"></i></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="home.php">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="list.php">List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="movieSearch.php">Search</a>
-                        </li>
-                    </ul>
-                    <span class="navbar-text">
-                    <?php
-                        echo "<h5>You are  logged in as: ".$_SESSION['username']."</h5>";
-                        
-                    ?>
-                        <a href='logout.php'>Log out</a>
-                    </span>
-                     
-                      
-                    
-                </div>
-            </div>
-        </nav>
-        
+        <?php
+        include('nav.php');
+            if(isset($_GET['added']))
+            {
+                $add = $_GET['added'];
+                if($add == 1)
+                {
+                    echo "<div class=\"alert alert-success\">Movie added!</div><br/>";
+                }
+                else
+                {
+                    echo "<div class=\"alert alert-danger\">Movie already in  your list!</div><br/>";
+                }
+            }
+            ?>
         <div class="container">
             <div class="jumbotron">
                 <h3 class="text-center">Movies</h3>
@@ -114,27 +107,34 @@
                     </form>
                     
                     </td>
-                    <td><button type="button" class="btn btn-danger" id="f">Add to favourites!</button></td>
-                    <td><button type="button" class="btn btn-primary" id="ptw">Plan to watch!</button></td>
+                    <td>
+                       <form action="favourite.php" method="post">
+                        <input id="fid" type="hidden" name="movie_id">
+                        <input id="ftitle" type="hidden" name="title">
+                        <input id="fdat" type="hidden" name="date">
+                        <input id="fratin" type="hidden" name="rating">
+                        <input id="fimag" type="hidden" name="image">
+                        <input id="fgenr" type="hidden" name="genre">
+                        <button type="submit" name="submit_btn" class="btn btn-danger" id="f">Add to favourites!</button>    
+                    </form>
+                    </td>
+                    
+                    <td>
+                        <form action="plan.php" method="post">
+                        <input id="pid" type="hidden" name="movie_id">
+                        <input id="ptitle" type="hidden" name="title">
+                        <input id="pdat" type="hidden" name="date">
+                        <input id="pratin" type="hidden" name="rating">
+                        <input id="pimag" type="hidden" name="image">
+                        <input id="pgenr" type="hidden" name="genre">
+                        <button type="submit" name="submit_btn" class="btn btn-primary" id="ptw">Plan to watch!</button>    
+                        </form>
+                        
+                    </td>
                 </tr>
             </table>
             </div>
-            <div id="movieInfo" class="row">
-                <div id="title" class="col-6">
-                    
-                </div>
-
-                
-                <!--<img id="preview" src="" class="img-thumbnail rounded float-right"> 
-                <img src="..." class="rounded float-left" alt="...">
-                <img src="..." class="rounded float-right" alt="...">-->
-                
-            
-            </div>
-            
-            
         </div>
-
         <script
           src="http://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

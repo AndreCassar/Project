@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2018 at 10:50 PM
+-- Generation Time: May 06, 2018 at 10:37 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -37,52 +37,17 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`genre`) VALUES
-(' Action'),
 (' Adventure'),
-('Animation');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `movie-genre`
---
-
-CREATE TABLE `movie-genre` (
-  `movie_id` varchar(50) NOT NULL,
-  `genre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `movie-genre`
---
-
-INSERT INTO `movie-genre` (`movie_id`, `genre`) VALUES
-('tt2560140', ' Action'),
-('tt2560140', ' Adventure'),
-('tt2560140', 'Animation');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `movie-user`
---
-
-CREATE TABLE `movie-user` (
-  `movie_id` varchar(50) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `rating` int(11) DEFAULT NULL,
-  `comments` varchar(100) DEFAULT NULL,
-  `watched` varchar(10) DEFAULT NULL,
-  `favourite` varchar(10) DEFAULT NULL,
-  `plan_to_watch` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `movie-user`
---
-
-INSERT INTO `movie-user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES
-('tt2560140', 1, NULL, NULL, 'True', NULL, NULL);
+(' Drama'),
+(' History'),
+(' Mystery'),
+(' Romance'),
+(' Sci-Fi'),
+('Action'),
+('Animation'),
+('Biography'),
+('Crime'),
+('Drama');
 
 -- --------------------------------------------------------
 
@@ -103,7 +68,80 @@ CREATE TABLE `movies` (
 --
 
 INSERT INTO `movies` (`movie_id`, `title`, `date`, `rating`, `image`) VALUES
-('tt2560140', 'Attack on Titan', '01 Apr 2013', 8.8, 'https://ia.media-imdb.com/images/M/MV5BMTY5ODk1NzUyMl5BMl5BanBnXkFtZTgwMjUyNzEyMTE@._V1_SX300.jpg');
+('tt0068646', 'The Godfather', '24 Mar 1972', 9.2, 'https://ia.media-imdb.com/images/M/MV5BY2Q2NzQ3ZDUtNWU5OC00Yjc0LThlYmEtNWM3NTFmM2JiY2VhXkEyXkFqcGdeQ'),
+('tt0109830', 'Forrest Gump', '06 Jul 1994', 8.8, 'https://ia.media-imdb.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQ'),
+('tt0110912', 'Pulp Fiction', '14 Oct 1994', 8.9, 'https://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SX300.jpg'),
+('tt0111161', 'The Shawshank Redemption', '14 Oct 1994', 9.3, 'https://ia.media-imdb.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQ'),
+('tt0133093', 'The Matrix', '31 Mar 1999', 8.7, 'https://ia.media-imdb.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyX'),
+('tt1375666', 'Inception', '16 Jul 2010', 8.8, 'https://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg'),
+('tt3613454', 'Terror in Resonance', '11 Jul 2014', 8, 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDMzNGEyNzItOTEyYi00MzQxLTgxOGQtZGJkZTRmNjUzN2Y'),
+('tt3748528', 'Rogue One: A Star Wars Story', '16 Dec 2016', 7.8, 'https://ia.media-imdb.com/images/M/MV5BMjEwMzMxODIzOV5BMl5BanBnXkFtZTgwNzg3OTAzMDI@._V1_SX300.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movie_genre`
+--
+
+CREATE TABLE `movie_genre` (
+  `movie_id` varchar(50) NOT NULL,
+  `genre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `movie_genre`
+--
+
+INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES
+('tt0068646', ' Drama'),
+('tt0068646', 'Crime'),
+('tt0109830', ' Romance'),
+('tt0109830', 'Drama'),
+('tt0110912', ' Drama'),
+('tt0110912', 'Crime'),
+('tt0111161', ' Drama'),
+('tt0111161', 'Crime'),
+('tt0133093', ' Sci-Fi'),
+('tt0133093', 'Action'),
+('tt1375666', ' Adventure'),
+('tt1375666', ' Sci-Fi'),
+('tt1375666', 'Action'),
+('tt3613454', ' Drama'),
+('tt3613454', ' Mystery'),
+('tt3613454', 'Animation'),
+('tt3748528', ' Adventure'),
+('tt3748528', ' Sci-Fi'),
+('tt3748528', 'Action');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movie_user`
+--
+
+CREATE TABLE `movie_user` (
+  `movie_id` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `comments` varchar(100) DEFAULT NULL,
+  `watched` varchar(10) DEFAULT NULL,
+  `favourite` varchar(10) DEFAULT NULL,
+  `plan_to_watch` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `movie_user`
+--
+
+INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES
+('tt0068646', 1, NULL, NULL, 'True', NULL, NULL),
+('tt0109830', 1, NULL, NULL, 'True', NULL, NULL),
+('tt0110912', 1, NULL, NULL, 'True', NULL, NULL),
+('tt0111161', 1, NULL, NULL, 'True', NULL, NULL),
+('tt0133093', 1, NULL, NULL, 'True', NULL, NULL),
+('tt1375666', 1, NULL, NULL, NULL, NULL, 'True'),
+('tt3613454', 1, NULL, NULL, 'True', 'True', NULL),
+('tt3748528', 1, NULL, NULL, 'True', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -139,26 +177,26 @@ ALTER TABLE `genre`
   ADD PRIMARY KEY (`genre`);
 
 --
--- Indexes for table `movie-genre`
+-- Indexes for table `movies`
 --
-ALTER TABLE `movie-genre`
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`movie_id`);
+
+--
+-- Indexes for table `movie_genre`
+--
+ALTER TABLE `movie_genre`
   ADD PRIMARY KEY (`movie_id`,`genre`),
   ADD KEY `movie_id` (`movie_id`),
   ADD KEY `genre_id` (`genre`);
 
 --
--- Indexes for table `movie-user`
+-- Indexes for table `movie_user`
 --
-ALTER TABLE `movie-user`
+ALTER TABLE `movie_user`
   ADD PRIMARY KEY (`movie_id`,`user_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `movie_id` (`movie_id`);
-
---
--- Indexes for table `movies`
---
-ALTER TABLE `movies`
-  ADD PRIMARY KEY (`movie_id`);
 
 --
 -- Indexes for table `users`
@@ -182,18 +220,18 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `movie-genre`
+-- Constraints for table `movie_genre`
 --
-ALTER TABLE `movie-genre`
-  ADD CONSTRAINT `movie-genre_ibfk_2` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`),
-  ADD CONSTRAINT `movie-genre_ibfk_3` FOREIGN KEY (`genre`) REFERENCES `genre` (`genre`);
+ALTER TABLE `movie_genre`
+  ADD CONSTRAINT `movie_genre_ibfk_2` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`),
+  ADD CONSTRAINT `movie_genre_ibfk_3` FOREIGN KEY (`genre`) REFERENCES `genre` (`genre`);
 
 --
--- Constraints for table `movie-user`
+-- Constraints for table `movie_user`
 --
-ALTER TABLE `movie-user`
-  ADD CONSTRAINT `movie-user_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`),
-  ADD CONSTRAINT `movie-user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE `movie_user`
+  ADD CONSTRAINT `movie_user_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`),
+  ADD CONSTRAINT `movie_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -26,6 +26,15 @@
             color: black;
         }
     </style>
+    <script>
+            function light() {
+                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+            }
+            function dark() 
+            {
+                document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
+            }
+        </script> 
 </head>
     <body>
       <?php

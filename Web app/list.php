@@ -2,6 +2,7 @@
     session_start();
     if(!isset($_SESSION['username']))
     {
+        header("location:index.php");
         die("You did not log in properly");
     }
 ?>
@@ -26,6 +27,15 @@
             }
 
         </style>
+        <script>
+            function light() {
+                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+            }
+            function dark() 
+            {
+                document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
+            }
+        </script> 
 
     </head>
 
@@ -33,34 +43,42 @@
         <?php
             include('nav.php');
         ?>
-
+        
         <div id="info" class="container">
            <div class="table-responsive-sm">
 
-            <table class="table table-bordered table-dark">
+            <table class="table table-dark">
                 <tr>
                     <th><font color="#669960">Title</font></th>
                     <th><font color="#669960">Genre</font></th>
                     <th><font color="#669960">Release Date</font></th>
                     <th><font color="#669960">Rating</font></th>
-                    <th><font color="#669960">Preview Image</font></th>
                     <th><font color="#669960">Comments</font></th>
-
+                    <th><font color="#669960">Submit</font></th>
+                    <th><font color="#669960">Remove from list</font></th>
                 </tr>
                 <?php
-                    include('connect.php');
+                include('connect.php');
                     $u = $_SESSION['user_id'];
-                //SELECT * FROM `movie-user` WHERE user_id = 1
-                    $query = "SELECT * FROM `movie-user` WHERE user_id = ".$u;
-                    $result = mysqli_query($link, $query) or die(mysqli_error($link));
+                    //$query = "SELECT * FROM `movie-user` WHERE user_id = ".$u;
+                    $query = "SELECT movie_user.movie_id, movie_user.rating, movie_user.comments, movie_user.plan_to_watch, movie_user.favourite, movie_user.watched, movies.title, movies.date FROM `movie_user` inner join movies on movie_user.movie_id = movies.movie_id WHERE movie_user.user_id = ".$u;
+                    //echo $query;
+                    $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
                     while ($row = mysqli_fetch_assoc($result)) 
                     {
-                        
-                
-                        
-                        $query = "SELECT * FROM movies WHERE movie_id = '".$row['movie_id']."'";
-                        $res = mysqli_query($link, $query) or die(mysqli_error($link));
-                        $r = mysqli_fetch_assoc($res);        
+                        //$query = "SELECT * FROM movies WHERE movie_id = '".$row['movie_id']."'";
+                        //$res = mysqli_query($link, $query) or die(mysqli_error($link));
+                        //$r = mysqli_fetch_assoc($res);
+                        //SELECT genre FROM `movie_genre` WHERE movie_id = 'tt2560140'
+                        $sql = "SELECT genre FROM `movie_genre` WHERE movie_id = '".$row['movie_id']."'";
+                        //echo $sql;
+                        $re = mysqli_query($link, $sql) or die("error here: ".mysqli_error($link));
+                        $genre = "";
+                        while ($r = mysqli_fetch_assoc($re))
+                        {
+                            $genre .= $r['genre']." ";
+                            //echo $genre;
+                        }
                         
                         if($row['plan_to_watch'] == 'True')
                         {
@@ -74,50 +92,51 @@
                         {
                             $col = 'bg-success';
                         }
-                        $q = "SELECT * FROM movie-genre WHERE movie_id = '".$row['movie_id']."'";
-                        $re = mysqli_query($link, $q) or die(mysqli_error($link));
-                        $g = mysqli_fetch_assoc($re);
+                        //$q = "SELECT * FROM movie-genre WHERE movie_id = '".$row['movie_id']."'";
+                        //$re = mysqli_query($link, $q) or die(mysqli_error($link));
+                        //$g = mysqli_fetch_assoc($re);
                         
 						echo "<tr class='$col'>";
-				        echo "<td>".$r['title']."</td>";
-						echo "<td></td>";
-						echo "<td>".$r['date']."</td>";
+				        echo "<td>".$row['title']."</td>";
+                        echo "<td>".$genre."</td>";
+						echo "<td>".$row['date']."</td>";
+						
 						echo "<td>";
                         ?>
-                        <select>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
+                        <form action="review.php" method="post">
+                            <div class="form-group">
+                                <select>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        
                         <?php
-                        //echo "</td>";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<div class='form-group'>";
+                        echo "<input type='text' class='form-control' id='formGroupExampleInput' placeholder='Enter comment'>";
+                        echo "</div>";
+                        echo "</td>";
+                        echo "<td><a class=\"btn btn-secondary\" href=\"review.php?id=".$row['movie_id']."\">Submit</a></td>";
+                        echo "</form>";
+                        echo "<td><a class=\"btn btn-danger\" href=\"delete.php?id=".$row['movie_id']."\">Remove</a></td>";
+                        
                         //echo "<td><img src=\"".$r['image']."\" alt='No preview available' height='240' width='180'></td>";
-						//echo "</tr>";
+						echo "</tr>";
 					}
                 ?>
                 
             </table>
             </div>
-            <div id="movieInfo" class="row">
-                <div id="title" class="col-6">
-                    
-                </div>
-
-                
-                <!--<img id="preview" src="" class="img-thumbnail rounded float-right"> 
-                <img src="..." class="rounded float-left" alt="...">
-                <img src="..." class="rounded float-right" alt="...">-->
-                
-            
-            </div>
-            
             
         </div>
 

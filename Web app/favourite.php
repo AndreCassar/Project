@@ -101,9 +101,10 @@
         
           
         $u = $_SESSION['user_id'];
-
-        $query = "INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('$id', '$u', NULL, NULL, 'True', NULL, NULL);";
-        mysqli_query($link, $query);
+        //UPDATE `movie_user` SET `favourite` = 'True' WHERE `movie_user`.`movie_id` = 'tt2560140' AND `movie_user`.`user_id` = 1;
+        $sql = "UPDATE movie_user SET favourite = 'True' WHERE `movie_user`.`movie_id` = '$id' AND `movie_user`.`user_id` = ".$u;
+        $query = "INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('$id', '$u', NULL, NULL, 'True', 'True', NULL);";
+        mysqli_query($link, $query) or mysqli_query($link, $sql);
         
         if(mysqli_affected_rows($link) != 1)
         {

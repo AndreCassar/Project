@@ -6,6 +6,7 @@ $('#search').click(function()
 {
     //document.getElementById('preview').style.visibility = 'visible';
     $("#movieInfo").show();
+    $("#added").hide();
     //$("#title").clear();
     var movie_name = $("#movieSearch").val();
     console.log(movie_name);
@@ -19,6 +20,7 @@ $('#search').click(function()
         else
         {
             $("#info").show();
+            
             //alert(movie_name);
             //alert( "Load was performed, we got the books" );
             console.log(data.Title);
@@ -31,6 +33,20 @@ $('#search').click(function()
             $("#ratin").val(data.imdbRating);
             $("#genr").val(data.Genre);
             $("#imag").val(data.Poster);
+            
+            $("#fid").val(data.imdbID);
+            $("#ftitle").val(data.Title);
+            $("#fdat").val(data.Released);
+            $("#fratin").val(data.imdbRating);
+            $("#fgenr").val(data.Genre);
+            $("#fimag").val(data.Poster);
+            
+            $("#pid").val(data.imdbID);
+            $("#ptitle").val(data.Title);
+            $("#pdat").val(data.Released);
+            $("#pratin").val(data.imdbRating);
+            $("#pgenr").val(data.Genre);
+            $("#pimag").val(data.Poster);
             
             //document.getElementById("id").innerHTML = data.imdbID;
             document.getElementById("titl").innerHTML = data.Title;

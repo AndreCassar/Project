@@ -17,6 +17,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="movieSearch.php">Search</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="advancedSearch.php">Filtered Search</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Change theme</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" onclick="dark()">Dark</a>
+                      <a class="dropdown-item" onclick="light()">Light</a>
+                    </div>
+                </li>
             </ul>
             <span class="navbar-text">
                 <?php
