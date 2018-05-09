@@ -27,6 +27,9 @@
                       <a class="dropdown-item" onclick="light()">Light</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact us</a>
+                </li>
             </ul>
             <span class="navbar-text">
                 <?php

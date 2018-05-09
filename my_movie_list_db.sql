@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2018 at 10:37 PM
+-- Generation Time: May 09, 2018 at 10:50 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -37,17 +37,14 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`genre`) VALUES
-(' Adventure'),
-(' Drama'),
-(' History'),
-(' Mystery'),
-(' Romance'),
-(' Sci-Fi'),
 ('Action'),
+('Adventure'),
 ('Animation'),
-('Biography'),
 ('Crime'),
-('Drama');
+('Drama'),
+('Mystery'),
+('Romance'),
+('Sci-Fi');
 
 -- --------------------------------------------------------
 
@@ -70,12 +67,10 @@ CREATE TABLE `movies` (
 INSERT INTO `movies` (`movie_id`, `title`, `date`, `rating`, `image`) VALUES
 ('tt0068646', 'The Godfather', '24 Mar 1972', 9.2, 'https://ia.media-imdb.com/images/M/MV5BY2Q2NzQ3ZDUtNWU5OC00Yjc0LThlYmEtNWM3NTFmM2JiY2VhXkEyXkFqcGdeQ'),
 ('tt0109830', 'Forrest Gump', '06 Jul 1994', 8.8, 'https://ia.media-imdb.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzYtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQ'),
-('tt0110912', 'Pulp Fiction', '14 Oct 1994', 8.9, 'https://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SX300.jpg'),
 ('tt0111161', 'The Shawshank Redemption', '14 Oct 1994', 9.3, 'https://ia.media-imdb.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQ'),
 ('tt0133093', 'The Matrix', '31 Mar 1999', 8.7, 'https://ia.media-imdb.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyX'),
 ('tt1375666', 'Inception', '16 Jul 2010', 8.8, 'https://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg'),
-('tt3613454', 'Terror in Resonance', '11 Jul 2014', 8, 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDMzNGEyNzItOTEyYi00MzQxLTgxOGQtZGJkZTRmNjUzN2Y'),
-('tt3748528', 'Rogue One: A Star Wars Story', '16 Dec 2016', 7.8, 'https://ia.media-imdb.com/images/M/MV5BMjEwMzMxODIzOV5BMl5BanBnXkFtZTgwNzg3OTAzMDI@._V1_SX300.jpg');
+('tt3613454', 'Terror in Resonance', '11 Jul 2014', 8, 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDMzNGEyNzItOTEyYi00MzQxLTgxOGQtZGJkZTRmNjUzN2Y');
 
 -- --------------------------------------------------------
 
@@ -93,25 +88,20 @@ CREATE TABLE `movie_genre` (
 --
 
 INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES
-('tt0068646', ' Drama'),
 ('tt0068646', 'Crime'),
-('tt0109830', ' Romance'),
+('tt0068646', 'Drama'),
 ('tt0109830', 'Drama'),
-('tt0110912', ' Drama'),
-('tt0110912', 'Crime'),
-('tt0111161', ' Drama'),
+('tt0109830', 'Romance'),
 ('tt0111161', 'Crime'),
-('tt0133093', ' Sci-Fi'),
+('tt0111161', 'Drama'),
 ('tt0133093', 'Action'),
-('tt1375666', ' Adventure'),
-('tt1375666', ' Sci-Fi'),
+('tt0133093', 'Sci-Fi'),
 ('tt1375666', 'Action'),
-('tt3613454', ' Drama'),
-('tt3613454', ' Mystery'),
+('tt1375666', 'Adventure'),
+('tt1375666', 'Sci-Fi'),
 ('tt3613454', 'Animation'),
-('tt3748528', ' Adventure'),
-('tt3748528', ' Sci-Fi'),
-('tt3748528', 'Action');
+('tt3613454', 'Drama'),
+('tt3613454', 'Mystery');
 
 -- --------------------------------------------------------
 
@@ -136,12 +126,10 @@ CREATE TABLE `movie_user` (
 INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES
 ('tt0068646', 1, NULL, NULL, 'True', NULL, NULL),
 ('tt0109830', 1, NULL, NULL, 'True', NULL, NULL),
-('tt0110912', 1, NULL, NULL, 'True', NULL, NULL),
 ('tt0111161', 1, NULL, NULL, 'True', NULL, NULL),
-('tt0133093', 1, NULL, NULL, 'True', NULL, NULL),
-('tt1375666', 1, NULL, NULL, NULL, NULL, 'True'),
-('tt3613454', 1, NULL, NULL, 'True', 'True', NULL),
-('tt3748528', 1, NULL, NULL, 'True', NULL, NULL);
+('tt0133093', 1, 0, '', 'True', NULL, NULL),
+('tt1375666', 1, NULL, NULL, 'True', NULL, NULL),
+('tt3613454', 1, 9, 'best action-drama ever', 'True', NULL, NULL);
 
 -- --------------------------------------------------------
 

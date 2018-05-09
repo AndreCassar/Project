@@ -73,15 +73,16 @@
                 }
                 
             }
-            echo "G is: ".$g;
-            $query = "INSERT INTO `genre` (`genre`) VALUES ('$g')";
+            echo "G is:".ltrim($g);
+            $gen = ltrim($g);
+            $query = "INSERT INTO `genre` (`genre`) VALUES ('$gen')";
             mysqli_query($link, $query);
             if(mysqli_affected_rows($link) != 1)
             {
                 $added = false;
             }
             
-            $sql = "INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES ('$id', '$g')";
+            $sql = "INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES ('$id', '$gen')";
             mysqli_query($link, $sql);
             if(mysqli_affected_rows($link) != 1)
             {

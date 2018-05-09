@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
     if(isset($_SESSION['username']))
     {
         header("location:home.php");

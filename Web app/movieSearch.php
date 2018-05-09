@@ -19,7 +19,12 @@
                 height:100%; /* important to vertically align the container */
                 margin:0;
                 padding:0;
+                <?php
+                echo "background-image: url(".$_SESSION['bgi'].");";
+                ?>
+                /*
                 background-image: url(http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg);
+                */
             }
             #info
             {
@@ -29,10 +34,16 @@
         </style>
         <script>
             function light() {
+                <?php
+                $_SESSION['bgi'] = "https://i.imgur.com/NGAN1yI.jpg";
+                ?>
                 document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
             }
             function dark() 
             {
+                <?php
+                $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
+                ?>
                 document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
             }
         </script>

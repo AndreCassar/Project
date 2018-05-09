@@ -25,7 +25,6 @@
             {
                 color: #696d69;
             }
-
         </style>
         <script>
             function light() {
@@ -46,8 +45,9 @@
         
         <div id="info" class="container">
            <div class="table-responsive-sm">
-
+            
             <table class="table table-dark">
+                <thead>
                 <tr>
                     <th><font color="#669960">Title</font></th>
                     <th><font color="#669960">Genre</font></th>
@@ -57,6 +57,8 @@
                     <th><font color="#669960">Submit</font></th>
                     <th><font color="#669960">Remove from list</font></th>
                 </tr>
+                </thead>
+                <tbody>
                 <?php
                 include('connect.php');
                     $u = $_SESSION['user_id'];
@@ -102,31 +104,49 @@
 						echo "<td>".$row['date']."</td>";
 						
 						echo "<td>";
-                        ?>
-                        <form action="review.php" method="post">
-                            <div class="form-group">
-                                <select>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
-                            </div>
-                        
-                        <?php
+                        echo "<form action='review.php' method='post'>";
+                        echo "<div class='form-group'>";
+                        echo "<select name='rat'>";
+                        echo "<option>-</option>";
+                        for ($x = 1; $x <= 10; $x++) 
+                        {
+                            if($x == $row['rating'])
+                            {
+                                echo "<option selected value=".$x.">$x</option>"; 
+                            }
+                            else
+                            {
+                                echo "<option value=".$x.">$x</option>";
+                            }
+                            
+                        } 
+                        echo "</select>";
+                        echo "</div>";
                         echo "</td>";
                         echo "<td>";
                         echo "<div class='form-group'>";
-                        echo "<input type='text' class='form-control' id='formGroupExampleInput' placeholder='Enter comment'>";
+                        if(isset($row['comments']))
+                        {
+                            if($row['comments'] == "")
+                            {
+                                echo "<input type='text' name='comment' class='form-control' placeholder='Enter comment'>";    
+                            }
+                            else
+                            {
+                                echo "<input type='text' name='comment' class='form-control' value='".$row['comments']."'>";
+                            }
+                                
+                        }
+                        else
+                        {
+                            echo "<input type='text' name='comment' class='form-control' placeholder='Enter comment'>";
+                        }
+                        
                         echo "</div>";
                         echo "</td>";
-                        echo "<td><a class=\"btn btn-secondary\" href=\"review.php?id=".$row['movie_id']."\">Submit</a></td>";
+                        echo "<td>";
+                        echo "<input type='hidden' name='rowID' value='".$row['movie_id']."'>";
+                        echo "<button type='submit' name='submit_btn' class='btn btn-dark' id='f'>Submit!</button></td>";
                         echo "</form>";
                         echo "<td><a class=\"btn btn-danger\" href=\"delete.php?id=".$row['movie_id']."\">Remove</a></td>";
                         
@@ -134,10 +154,9 @@
 						echo "</tr>";
 					}
                 ?>
-                
+                </tbody>
             </table>
             </div>
-            
         </div>
 
         <script

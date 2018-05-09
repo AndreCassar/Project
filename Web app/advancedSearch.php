@@ -19,7 +19,9 @@
                 height:100%; /* important to vertically align the container */
                 margin:0;
                 padding:0;
-                background-image: url(http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg);
+                <?php
+                echo "background-image: url(".$_SESSION['bgi'].");";
+                ?>
             }
             #info
             {
@@ -29,10 +31,16 @@
         </style>
         <script>
             function light() {
+                <?php
+                $_SESSION['bgi'] = "https://i.imgur.com/NGAN1yI.jpg";
+                ?>
                 document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
             }
             function dark() 
             {
+                <?php
+                $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
+                ?>
                 document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
             }
         </script> 
@@ -111,7 +119,7 @@
                         $title = $_POST['title'];
                         $genre = $_POST['genre'];
                         
-                        $query = "SELECT movie_genre.movie_id, movies.title, movies.date FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movie_genre.genre = '".$genre."'";
+                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movie_genre.genre = '".$genre."'";
                     
                         echo "<br/>".$query."<br/>";
                         $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
@@ -120,6 +128,9 @@
                         {    
                             echo "<tr>";
                             echo "<td>".$row['title']."</td>";
+                            echo "<td>".$row['genre']."</td>";
+                            echo "<td>".$row['date']."</td>";
+                            echo "<td>".$row['rating']."</td>";
                             echo "</tr>";
                         }
                     }
@@ -131,7 +142,5 @@
             </div>
             
         </div>
-        
-    
 </body>
 </html>
