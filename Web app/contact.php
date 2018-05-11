@@ -59,10 +59,10 @@
         <div class="container">
             <div class="jumbotron">
                 <h1 class="display-4">Contact us</h1>
-                <form>
+                <form action="send_Mail.php" method="post">
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Enter text</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="message" rows="3"></textarea>
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type='submit' name='submit_btn' class='btn btn-dark' id='f'>Submit!</button>
