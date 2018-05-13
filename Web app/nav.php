@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-4">
+   <img src="https://i.imgur.com/hfNDJYr.jpg" alt="asdasd" width="128" height="128">
     <div class="container">
         <a class="navbar-brand" href="#"><i class="fa fa-ravelry text-danger" aria-hidden="true"></i></a>
         <img src="images\Nav_Icon.png" width="50" height="50" alt="">

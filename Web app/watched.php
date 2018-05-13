@@ -79,14 +79,14 @@
             mysqli_query($link, $query);
             if(mysqli_affected_rows($link) != 1)
             {
-                $added = false;
+                //$added = false;
             }
             
             $sql = "INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES ('$id', '$gen')";
             mysqli_query($link, $sql);
             if(mysqli_affected_rows($link) != 1)
             {
-                $added = false;
+                //$added = false;
             }
             
         } 
@@ -97,7 +97,7 @@
         //mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
         if(mysqli_affected_rows($link) != 1)
         {
-            $added = false;
+            //$added = false;
         }
         
           

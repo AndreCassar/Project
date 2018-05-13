@@ -62,8 +62,10 @@
                             mysqli_query($link, $query);
 
                             //check if 1 row was added...
-                            if (mysqli_affected_rows($link) == 1) {
+                            if (mysqli_affected_rows($link) == 1) 
+                            {
                                 echo "<div class=\"alert alert-success\">Thank you! You were registered!</div>";
+                                echo "<div class=\"alert alert-success\"><a href='index.php'>Go back to index</a></div>";
                             }
                             else {
                                 echo "<div class=\"alert alert-warning\">Oops! Something went wrong!</div>";

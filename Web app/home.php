@@ -33,9 +33,9 @@
         <script>
             function light() {
                 <?php
-                $_SESSION['bgi'] = "https://i.imgur.com/NGAN1yI.jpg";
+                $_SESSION['bgi'] = "http://apshn.com/wp-content/uploads/2014/10/light-background.jpg";
                 ?>
-                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+                document.body.style.backgroundImage = "url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg')";
             }
             function dark() 
             {

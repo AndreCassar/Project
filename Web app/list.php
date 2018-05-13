@@ -19,19 +19,32 @@
                 height:100%; /* important to vertically align the container */
                 margin:0;
                 padding:0;
-                background-image: url(http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg);
+                <?php
+                echo "background-image: url(".$_SESSION['bgi'].");";
+                
+                ?>
             }
             #info
             {
                 color: #696d69;
             }
+            h1
+            {
+                text-align: center;
+            }
         </style>
         <script>
             function light() {
-                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+                <?php
+                $_SESSION['bgi'] = "http://apshn.com/wp-content/uploads/2014/10/light-background.jpg";
+                ?>
+                document.body.style.backgroundImage = "url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg')";
             }
             function dark() 
             {
+                <?php
+                $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
+                ?>
                 document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
             }
         </script> 
@@ -41,6 +54,19 @@
     <body>
         <?php
             include('nav.php');
+        include('connect.php');
+        $u = $_SESSION['user_id'];
+        //echo "<h2>".$_SESSION['bgi']."</h2>";
+        //$query = "SELECT * FROM `movie-user` WHERE user_id = ".$u;
+        $query = "SELECT movie_user.movie_id, movie_user.rating, movie_user.comments, movie_user.plan_to_watch, movie_user.favourite, movie_user.watched, movies.title, movies.date FROM `movie_user` inner join movies on movie_user.movie_id = movies.movie_id WHERE movie_user.user_id = ".$u;
+        //echo $query;
+        $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
+        if(mysqli_num_rows($result) == 0)
+        {
+            echo "<div class='jumbotron'>
+                    <h1>Your List is Currently Empty!</h1>
+                  </div>";
+        }
         ?>
         
         <div id="info" class="container">
@@ -60,12 +86,7 @@
                 </thead>
                 <tbody>
                 <?php
-                include('connect.php');
-                    $u = $_SESSION['user_id'];
-                    //$query = "SELECT * FROM `movie-user` WHERE user_id = ".$u;
-                    $query = "SELECT movie_user.movie_id, movie_user.rating, movie_user.comments, movie_user.plan_to_watch, movie_user.favourite, movie_user.watched, movies.title, movies.date FROM `movie_user` inner join movies on movie_user.movie_id = movies.movie_id WHERE movie_user.user_id = ".$u;
-                    //echo $query;
-                    $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
+                
                     while ($row = mysqli_fetch_assoc($result)) 
                     {
                         //$query = "SELECT * FROM movies WHERE movie_id = '".$row['movie_id']."'";

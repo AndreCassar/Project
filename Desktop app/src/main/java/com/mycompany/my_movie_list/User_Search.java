@@ -23,32 +23,54 @@ public class User_Search extends javax.swing.JFrame {
      * Creates new form User_Search
      */
     public static int id = 0;
+    public static String user = "";
     public User_Search() {
         initComponents();
-        
+        b1.setVisible(false);
+        list.setVisible(false);
     }
-    public void NewJFrame() {
+    public void Search() {
         //DefaultTableModel dm = (DefaultTableModel) getModel();
-
+        int rc = 0;
         try {               
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/my_movie_list_db?useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from users where user_id = "+username.getText());
+            ResultSet rs = stmt.executeQuery("Select * from users where username = '"+username.getText()+"'");
             DefaultTableModel m = (DefaultTableModel)jTable1.getModel();
             int rowCount = m.getRowCount();
-            //Remove rows one by one from the end of the table
+            
+            
+                System.out.println("rows:"+rowCount);
+                //Remove rows one by one from the end of the table
             for (int i = rowCount - 1; i >= 0; i--) {
                 m.removeRow(i);
             }
-            while (rs.next()) {              
+            jLabel2.setText("User found");
+            
+            while (rs.next()) {
+                rc++;
                 m.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(4),rs.getString(3)});
                 id = rs.getInt(1);
+                user = username.getText();
+            }
+            if(rc == 0)
+            {
+                System.out.println("Entered IF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! rows:"+rowCount);
+                jLabel2.setText("User not found");
+                for (int i = rowCount - 1; i >= 0; i--) {
+                m.removeRow(i);
+            }
             }
             
-            jLabel2.setText(""+id);
-            //System.out.println(".........................................................................................ID is"+id);
+            
+            //jLabel2.setText(""+id);
+            
+            b1.setVisible(true);
+            list.setVisible(true);
+            
             con.close();
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(users.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,6 +90,36 @@ public class User_Search extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(users.class.getName()).log(Level.SEVERE, null, ex);
 }}
+    /*
+    public void MovieList() {
+        //DefaultTableModel dm = (DefaultTableModel) getModel();
+        try {               
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/my_movie_list_db?useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from movie_user where user_id = "+id);
+            DefaultTableModel m = (DefaultTableModel)jTable1.getModel();
+            int rowCount = m.getRowCount();
+            jLabel2.setText(""+rowCount);
+            
+            //Remove rows one by one from the end of the table
+            for (int i = rowCount - 1; i >= 0; i--) {
+                m.removeRow(i);
+            }
+            while (rs.next()) {              
+                m.addRow(new Object[]{rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4), rs.getString(5)});
+                id = rs.getInt(1);
+            }
+            
+            jLabel2.setText(""+id);
+            con.close();
+            //list.setVisible(true);
+            //b1.setVisible(true);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(users.class.getName()).log(Level.SEVERE, null, ex);
+}}*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,10 +135,20 @@ public class User_Search extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        b1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        list = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("User Search");
 
         jLabel1.setText("Enter username to search:");
 
@@ -115,12 +177,60 @@ public class User_Search extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Delete");
+        b1.setText("Delete");
+        b1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        list.setText("Show Movie list");
+        list.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Retreive all users");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jMenu2.setText("File");
+
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu1.setText("Help");
+
+        jMenuItem1.setText("Searching for a User");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Deleting a user");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Retreiving all users");
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,45 +240,76 @@ public class User_Search extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(171, 171, 171)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                        .addGap(206, 206, 206)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(list, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b1)
+                    .addComponent(list))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        NewJFrame();
+        Search();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
         Delete();
+    }//GEN-LAST:event_b1ActionPerformed
+
+    private void listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listActionPerformed
+        Movie_list ml = new Movie_list();
+        ml.setVisible(true);
+    }//GEN-LAST:event_listActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+        {
+            dispose(); 
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Search_Help sh = new Search_Help();
+        sh.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        users u = new users();
+        u.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -207,12 +348,21 @@ public class User_Search extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton list;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

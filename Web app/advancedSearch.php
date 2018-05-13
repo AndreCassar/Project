@@ -34,7 +34,7 @@
                 <?php
                 $_SESSION['bgi'] = "https://i.imgur.com/NGAN1yI.jpg";
                 ?>
-                document.body.style.backgroundImage = "url('https://i.imgur.com/NGAN1yI.jpg')";
+                document.body.style.backgroundImage = "url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg')";
             }
             function dark() 
             {
@@ -99,31 +99,28 @@
                         </form>
             </div>
             </div>
-            
-        <div id="info" class="container">
-           <div class="table-responsive-sm">
+            <div id="info" class="container">
+                       <div class="table-responsive-sm">
 
-            <table class="table table-dark">
-                <tr>
-                    <th><font color="#669960">Title</font></th>
-                    <th><font color="#669960">Genre</font></th>
-                    <th><font color="#669960">Release Date</font></th>
-                    <th><font color="#669960">Rating</font></th>
-                    <th><font color="#669960">Comments</font></th>
-                    <th><font color="#669960">Remove from list</font></th>
-                </tr>
-                <?php
+                        <table class="table table-dark">
+            <?php
                 
-                    if(isset($_POST['filters']))
+                if(isset($_POST['filters']))
+                {
+                    echo'<tr>
+                                <th><font color="#669960">Title</font></th>
+                                <th><font color="#669960">Genre</font></th>
+                                <th><font color="#669960">Release Date</font></th>
+                                <th><font color="#669960">Rating</font></th>
+                            </tr>';
+                
+                    $title = $_POST['title'];
+                    $genre = $_POST['genre'];
+                    if($title == "")
                     {
-                        $title = $_POST['title'];
-                        $genre = $_POST['genre'];
-                        
                         $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movie_genre.genre = '".$genre."'";
                     
-                        echo "<br/>".$query."<br/>";
                         $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
-                         echo "<br/>".mysqli_num_rows($result)."<br/>";
                         while ($row = mysqli_fetch_assoc($result))
                         {    
                             echo "<tr>";
@@ -134,6 +131,22 @@
                             echo "</tr>";
                         }
                     }
+                    else
+                    {   
+                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movies.title = '$title' AND movie_genre.genre = '".$genre."'";
+                    
+                        $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
+                        while ($row = mysqli_fetch_assoc($result))
+                        {
+                            echo "<tr>";
+                                echo "<td>".$row['title']."</td>";
+                                echo "<td>".$row['genre']."</td>";
+                                echo "<td>".$row['date']."</td>";
+                                echo "<td>".$row['rating']."</td>";
+                            echo "</tr>";
+                        }
+                    }
+                }
                     
                     
                 ?>
@@ -142,5 +155,8 @@
             </div>
             
         </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
 </html>
