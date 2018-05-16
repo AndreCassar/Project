@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-4">
-   <img src="https://i.imgur.com/hfNDJYr.jpg" alt="asdasd" width="128" height="128">
+   <img src="imgs\Movies_Logo.jpg" alt="asdasd" width="128" height="128">
     <div class="container">
         <a class="navbar-brand" href="#"><i class="fa fa-ravelry text-danger" aria-hidden="true"></i></a>
         <img src="images\Nav_Icon.png" width="50" height="50" alt="">
@@ -13,7 +13,7 @@
                     <a class="nav-link" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="list.php">List</a>
+                    <a class="nav-link" href="list.php">My List</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="movieSearch.php">Search</a>
@@ -24,12 +24,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Change theme</a>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" onclick="dark()">Dark</a>
-                      <a class="dropdown-item" onclick="light()">Light</a>
+                      <a class="dropdown-item" href="dark.php">Dark</a>
+                      <a class="dropdown-item" href="light.php">Light</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.php">Contact us</a>
+                    <a class="nav-link" href="help.php">Help</a>
                 </li>
             </ul>
             <span class="navbar-text">

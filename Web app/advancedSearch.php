@@ -20,7 +20,24 @@
                 margin:0;
                 padding:0;
                 <?php
-                echo "background-image: url(".$_SESSION['bgi'].");";
+                
+                if(isset($_GET['theme']))
+                {
+                    $theme = $_GET['theme'];
+                    if($theme == 0)
+                    {
+                        echo "background-image: url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg');";
+                    }
+                    else
+                    {
+                        echo "background-image: url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg;');";
+                    }
+                }
+                else
+                {
+                    echo "background-image: url(".$_SESSION['bgi'].");";
+                
+                }
                 ?>
             }
             #info
@@ -29,21 +46,6 @@
             }
 
         </style>
-        <script>
-            function light() {
-                <?php
-                $_SESSION['bgi'] = "https://i.imgur.com/NGAN1yI.jpg";
-                ?>
-                document.body.style.backgroundImage = "url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg')";
-            }
-            function dark() 
-            {
-                <?php
-                $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
-                ?>
-                document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
-            }
-        </script> 
 
     </head>
 
@@ -79,7 +81,8 @@
                                 $query = "SELECT genre FROM genre";
                                 //echo $query;
                                 $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
-                                echo "<select name='genre'>";
+
+                                echo "<select class='form-control' name='genre'>";
                                 while ($r = mysqli_fetch_assoc($result))
                                 {
                                     $g = $r['genre'];
@@ -132,8 +135,8 @@
                         }
                     }
                     else
-                    {   
-                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movies.title = '$title' AND movie_genre.genre = '".$genre."'";
+                    {  //WHERE column1 LIKE '%word1%' 
+                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movies.title LIKE '%$title%' AND movie_genre.genre = '".$genre."'";
                     
                         $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
                         while ($row = mysqli_fetch_assoc($result))

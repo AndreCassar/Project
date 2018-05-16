@@ -48,6 +48,14 @@
                 }
 
             }
+            if(isset($_GET['login']))
+            {
+                $l = $_GET['login'];
+                if($l == 0)
+                {
+                    echo "<div class=\"alert alert-danger\">Incorrect username or Password!</div><br/>";
+                }
+            }
         ?>
        <div class="vertical-center">
         <div class="container">

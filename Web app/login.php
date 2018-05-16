@@ -30,6 +30,7 @@
                     //log user in!
                     $_SESSION['username'] = $username;
                     $_SESSION['user_id'] = $row[user_id];
+                    $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
                     header("location:home.php?login=1");
                 }
                 else

@@ -20,8 +20,7 @@
                 margin:0;
                 padding:0;
                 <?php
-                echo "background-image: url(".$_SESSION['bgi'].");";
-                
+                    echo "background-image: url(".$_SESSION['bgi'].");";
                 ?>
             }
             #info
@@ -32,22 +31,41 @@
             {
                 text-align: center;
             }
-        </style>
-        <script>
-            function light() {
-                <?php
-                $_SESSION['bgi'] = "http://apshn.com/wp-content/uploads/2014/10/light-background.jpg";
-                ?>
-                document.body.style.backgroundImage = "url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg')";
-            }
-            function dark() 
+            legend
             {
-                <?php
-                $_SESSION['bgi'] = "http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg";
-                ?>
-                document.body.style.backgroundImage = "url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg')";
+                margin-top: 15%;
+                height: 50px;
+                float: left;
+                width: 150px;
             }
-        </script> 
+            #wat
+            {
+                height: 50px;
+                background-color: #00C851;
+                float: left;
+                margin-right: 50px;
+                width: 150px;
+                margin-bottom: 50px;
+            }
+            #fav
+            {
+                height: 50px;
+                background-color: #ff4444;
+                float: left;
+                margin-right: 50px;
+                width: 150px;
+                margin-bottom: 50px;
+            }
+            #pltw
+            {
+                height: 50px;
+                background-color: #4285F4;
+                float: left;
+                width: 150px;
+                
+            }
+        </style>
+
 
     </head>
 
@@ -68,8 +86,15 @@
                   </div>";
         }
         ?>
-        
+        <legend align="left">
+          <fieldset>
+           <div id="wat"> Watched</div>
+            <div id="fav">Favourite</div>
+            <div id="pltw">Plan to watch</div>
+          </fieldset>
+            </legend>
         <div id="info" class="container">
+          
            <div class="table-responsive-sm">
             
             <table class="table table-dark">

@@ -20,7 +20,24 @@
                 margin:0;
                 padding:0;
                 <?php
+                
+                if(isset($_GET['theme']))
+                {
+                    $theme = $_GET['theme'];
+                    if($theme == 0)
+                    {
+                        echo "background-image: url('http://apshn.com/wp-content/uploads/2014/10/light-background.jpg');";
+                    }
+                    else
+                    {
+                        echo "background-image: url('http://mattvizzo.com/wp-content/uploads/2013/08/dark-website-backgrounds-10.jpg;');";
+                    }
+                }
+                else
+                {
                     echo "background-image: url(".$_SESSION['bgi'].");";
+                
+                }
                 ?>
             }
             h3
@@ -38,41 +55,20 @@
         ?>
         
         <div id="info" class="container">
-            <h3>Top 10 highest ranked movies from our database!</h3>
-              <div class="table-responsive-sm">
-            
-            <table class="table table-dark">
-                <tr>
-                    <th><font color="#669960">Rank</font></th>
-                    <th><font color="#669960">Title</font></th>
-                    <th><font color="#669960">Avg. Rating</font></th>
-                </tr>
-                <?php
-                    include('connect.php');
-                    $u = $_SESSION['user_id'];
-                    //$query = "SELECT * FROM `movie-user` WHERE user_id = ".$u;
-                    $query = "SELECT * FROM `movies` ORDER BY `rating` DESC";
-                    
-                    //echo $query;
-                    $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
-                    $rank = 1;
-                    while ($row = mysqli_fetch_assoc($result))
-                    {    
-						echo "<tr>";
-                        echo "<td><h4>".$rank."</h4></td>";
-				        echo "<td>".$row['title']."</td>";
-						echo "<td>".$row['rating']."</td>";
-						echo "</tr>";
-                        $rank++;
-                        if($rank > 10)
-                        {
-                            break;
-                        }
-					}
-                ?>
+            <h3>Help</h3>
+            <div class="jumbotron">
+                <p>The My Movie List website allws its users to create a list of their watched, favourite and plan to watch movies.</p>
+                <p>This can be done by searching for a movie from the Search page or the Filtered Search page and afterwards clicking on the respective button</p>
+                <hr class="my-4">
+                <p>Once a movie is added to your list you can rate and add a comment/review to it by entering entering the data and clicking 'submit' in the row of the movie you wish to rate or review</p>
+                <p>In addition, in order to remove a movie from your list, simply click the 'remove' button next to the movie you wish to delete from your list</p>
                 
-            </table>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>
             </div>
+            
+ 
             
         </div>
         

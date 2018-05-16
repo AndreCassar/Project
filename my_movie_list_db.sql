@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2018 at 07:59 PM
+-- Generation Time: May 16, 2018 at 11:55 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -78,6 +78,7 @@ INSERT INTO `movies` (`movie_id`, `title`, `date`, `rating`, `image`) VALUES
 ('tt0133093', 'The Matrix', '31 Mar 1999', 8.7, 'https://ia.media-imdb.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyX'),
 ('tt0468569', 'The Dark Knight', '18 Jul 2008', 9, 'https://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg'),
 ('tt1375666', 'Inception', '16 Jul 2010', 8.8, 'https://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg'),
+('tt1386697', 'Suicide Squad', '05 Aug 2016', 6.1, 'https://ia.media-imdb.com/images/M/MV5BMjM1OTMxNzUyM15BMl5BanBnXkFtZTgwNjYzMTIzOTE@._V1_SX300.jpg'),
 ('tt3613454', 'Terror in Resonance', '11 Jul 2014', 8, 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDMzNGEyNzItOTEyYi00MzQxLTgxOGQtZGJkZTRmNjUzN2Y');
 
 -- --------------------------------------------------------
@@ -121,6 +122,9 @@ INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES
 ('tt1375666', 'Action'),
 ('tt1375666', 'Adventure'),
 ('tt1375666', 'Sci-Fi'),
+('tt1386697', 'Action'),
+('tt1386697', 'Adventure'),
+('tt1386697', 'Fantasy'),
 ('tt3613454', 'Animation'),
 ('tt3613454', 'Drama'),
 ('tt3613454', 'Mystery');
@@ -151,11 +155,12 @@ INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`
 ('tt0093773', 9, NULL, NULL, 'True', NULL, NULL),
 ('tt0097576', 9, NULL, NULL, 'True', NULL, NULL),
 ('tt0109830', 9, NULL, NULL, 'True', NULL, NULL),
-('tt0120737', 9, NULL, NULL, 'True', NULL, NULL),
+('tt0120737', 9, 8, 'Amazing fantasy', 'True', NULL, NULL),
 ('tt0120815', 9, NULL, NULL, 'True', NULL, NULL),
 ('tt0133093', 9, NULL, NULL, 'True', NULL, NULL),
 ('tt0468569', 1, NULL, NULL, 'True', NULL, NULL),
 ('tt1375666', 9, NULL, NULL, NULL, NULL, 'True'),
+('tt1386697', 1, NULL, NULL, 'True', NULL, NULL),
 ('tt3613454', 9, NULL, NULL, 'True', 'True', NULL);
 
 -- --------------------------------------------------------
@@ -182,7 +187,9 @@ INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES
 (8, 'as', 'asd@a', '312414'),
 (9, 'test', 'test@test', 'test'),
 (10, 'affngfn', 'dfg@vbnv', 't'),
-(11, 'dgdgfdfgdfg', 'fc@vc', 'f');
+(11, 'dgdgfdfgdfg', 'fc@vc', 'f'),
+(12, 'b', 'b@b', 'b'),
+(14, 'admin', 'admin@admin', 'pass');
 
 --
 -- Indexes for dumped tables
@@ -231,7 +238,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
