@@ -12,6 +12,7 @@
         echo "Date released: ".$date."<br/>";
         echo "rating: ".$rating."<br/>";
         echo "ID: ".$id."<br/>";
+        echo "img ".$url;
         
         include('connect.php');
         $query = "INSERT INTO movies (movie_id, title, date, rating, image) VALUES ('$id', '$title', '$date', '$rating', '$url')";
@@ -104,12 +105,12 @@
         $u = $_SESSION['user_id'];
 
         $query = "INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('$id', '$u', NULL, NULL, 'True', NULL, NULL);";
-        mysqli_query($link, $query);
+        mysqli_query($link, $query) or $added = false;
         
-        if(mysqli_affected_rows($link) != 1)
-        {
-            $added = false;
-        }
+        //if(mysqli_affected_rows($query) >= 1)
+        //{
+            
+        //}
         if($added == true)
         {
             header("location:movieSearch.php?added=1");

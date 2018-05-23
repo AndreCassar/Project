@@ -44,6 +44,7 @@
             <table class="table table-dark">
                 <tr>
                     <th><font color="#669960">Rank</font></th>
+                    <th><font color="#669960">Preview Image</font></th>
                     <th><font color="#669960">Title</font></th>
                     <th><font color="#669960">Avg. Rating</font></th>
                 </tr>
@@ -60,6 +61,7 @@
                     {    
 						echo "<tr>";
                         echo "<td><h4>".$rank."</h4></td>";
+                        echo "<td><img id='url' src=".$row['image']." alt='No preview available' height='80' width='70'></td>";
 				        echo "<td>".$row['title']."</td>";
 						echo "<td>".$row['rating']."</td>";
 						echo "</tr>";

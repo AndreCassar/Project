@@ -76,17 +76,11 @@
             $gen = ltrim($g);
             $query = "INSERT INTO `genre` (`genre`) VALUES ('$gen')";
             mysqli_query($link, $query);
-            if(mysqli_affected_rows($link) != 1)
-            {
-                $added = false;
-            }
+
             
             $sql = "INSERT INTO `movie_genre` (`movie_id`, `genre`) VALUES ('$id', '$gen')";
             mysqli_query($link, $sql);
-            if(mysqli_affected_rows($link) != 1)
-            {
-                $added = false;
-            }
+
             
         } 
         
@@ -96,7 +90,7 @@
         //mysqli_query($link, $query) or die("Error in query: ". mysqli_error($link));
         if(mysqli_affected_rows($link) != 1)
         {
-            $added = false;
+            //$added = false;
         }
         
           
@@ -104,12 +98,8 @@
         //UPDATE `movie_user` SET `favourite` = 'True' WHERE `movie_user`.`movie_id` = 'tt2560140' AND `movie_user`.`user_id` = 1;
         $sql = "UPDATE movie_user SET plan_to_watch = 'True' WHERE `movie_user`.`movie_id` = '$id' AND `movie_user`.`user_id` = ".$u;
         $query = "INSERT INTO `movie_user` (`movie_id`, `user_id`, `rating`, `comments`, `watched`, `favourite`, `plan_to_watch`) VALUES ('$id', '$u', NULL, NULL, NULL, NULL, 'True');";
-        mysqli_query($link, $query) or mysqli_query($link, $sql);
+        mysqli_query($link, $query) or mysqli_query($link, $sql) or $added = false;
         
-        if(mysqli_affected_rows($link) != 1)
-        {
-            $added = false;
-        }
         if($added == true)
         {
             header("location:movieSearch.php?added=1");

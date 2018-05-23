@@ -112,6 +112,7 @@
                 {
                     echo'<tr>
                                 <th><font color="#669960">Title</font></th>
+                                <th><font color="#669960">Image</font></th>
                                 <th><font color="#669960">Genre</font></th>
                                 <th><font color="#669960">Release Date</font></th>
                                 <th><font color="#669960">Rating</font></th>
@@ -121,13 +122,14 @@
                     $genre = $_POST['genre'];
                     if($title == "")
                     {
-                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movie_genre.genre = '".$genre."'";
+                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.image, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movie_genre.genre = '".$genre."'";
                     
                         $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
                         while ($row = mysqli_fetch_assoc($result))
                         {    
                             echo "<tr>";
                             echo "<td>".$row['title']."</td>";
+                            echo "<td><img id='url' src=".$row['image']." alt='No preview available' height='50' width='40'></td>";
                             echo "<td>".$row['genre']."</td>";
                             echo "<td>".$row['date']."</td>";
                             echo "<td>".$row['rating']."</td>";
@@ -136,13 +138,14 @@
                     }
                     else
                     {  //WHERE column1 LIKE '%word1%' 
-                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movies.title LIKE '%$title%' AND movie_genre.genre = '".$genre."'";
+                        $query = "SELECT movie_genre.movie_id, movie_genre.genre, movies.title, movies.image, movies.date, movies.rating FROM `movie_genre` inner join movies on movie_genre.movie_id = movies.movie_id WHERE movies.title LIKE '%$title%' AND movie_genre.genre = '".$genre."'";
                     
                         $result = mysqli_query($link, $query) or die("error here: ".mysqli_error($link));
                         while ($row = mysqli_fetch_assoc($result))
                         {
                             echo "<tr>";
                                 echo "<td>".$row['title']."</td>";
+                                echo "<td><img id='im' src=".$row['image']." alt='No preview available' height='50' width='40'></td>";
                                 echo "<td>".$row['genre']."</td>";
                                 echo "<td>".$row['date']."</td>";
                                 echo "<td>".$row['rating']."</td>";

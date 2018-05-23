@@ -80,9 +80,24 @@ public class User_Search extends javax.swing.JFrame {
 
         try {               
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3307/my_movie_list_db?useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+                    "jdbc:mysql://localhost:3306/my_movie_list_db?useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("DELETE FROM users WHERE user_id = "+id);
+            DefaultTableModel m = (DefaultTableModel)jTable1.getModel();
+            
+            con.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(users.class.getName()).log(Level.SEVERE, null, ex);
+}}
+    public void DeleteList() {
+        //DefaultTableModel dm = (DefaultTableModel) getModel();
+
+        try {               
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/my_movie_list_db?useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("DELETE FROM movie_user WHERE user_id = "+id);
             DefaultTableModel m = (DefaultTableModel)jTable1.getModel();
             
             con.close();
@@ -296,6 +311,7 @@ public class User_Search extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
+        DeleteList();
         Delete();
     }//GEN-LAST:event_b1ActionPerformed
 

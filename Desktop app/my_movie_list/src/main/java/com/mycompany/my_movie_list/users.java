@@ -64,7 +64,7 @@ public class users extends javax.swing.JFrame {
 
             },
             new String [] {
-                "User_id", "username", "password", "email"
+                "User_id", "username", "email", "password"
             }
         ) {
             Class[] types = new Class [] {

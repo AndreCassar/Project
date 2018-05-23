@@ -19,7 +19,7 @@
                     <a class="nav-link" href="movieSearch.php">Search</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="advancedSearch.php">Filtered Search</a>
+                    <a class="nav-link" href="advancedSearch.php">Advanced Search</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Change theme</a>
@@ -34,7 +34,7 @@
             </ul>
             <span class="navbar-text">
                 <?php
-                    echo "<h5>You are  logged in as: ".$_SESSION['username']."</h5>";
+                    echo "<h5>You are logged in as: ".$_SESSION['username']."</h5>";
                 ?>
                 <a href='logout.php'>Log out</a>
             </span>

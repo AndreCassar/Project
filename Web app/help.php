@@ -57,15 +57,14 @@
         <div id="info" class="container">
             <h3>Help</h3>
             <div class="jumbotron">
-                <p>The My Movie List website allws its users to create a list of their watched, favourite and plan to watch movies.</p>
-                <p>This can be done by searching for a movie from the Search page or the Filtered Search page and afterwards clicking on the respective button</p>
+                <p>The My Movie List website allows its users to create a list of their watched, favourite and plan to watch movies.</p>
+                <p>This can be done by searching for a movie from the Search page or the Filtered Search page and afterwards clicking on the respective button.</p>
+                <p>By adding a movie to your list you would be helping us expand our database.</p>
                 <hr class="my-4">
-                <p>Once a movie is added to your list you can rate and add a comment/review to it by entering entering the data and clicking 'submit' in the row of the movie you wish to rate or review</p>
-                <p>In addition, in order to remove a movie from your list, simply click the 'remove' button next to the movie you wish to delete from your list</p>
-                
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                </p>
+                <p>Once a movie is added to your list you can rate and add a comment/review to it by entering entering the data and clicking 'submit' in the row of the movie you wish to rate or review.</p>
+                <p>In addition, in order to remove a movie from your list, simply click the 'remove' button next to the movie you wish to delete from your list.</p>
+                <hr class="my-4">
+                <p>The 'Advanced Search' can be used to help our users discover more movies form our database by applying filtering by titles and genre.</p>
             </div>
             
  
